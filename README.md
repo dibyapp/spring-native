@@ -29,7 +29,7 @@ cd spring-native
 
 Read the POM and source map before running anything. Java 17 is the configured baseline. For native compilation, inspect the project's historical GraalVM requirements and the native C/C++ toolchain requirements for your OS.
 
-The root Maven wrapper is present. `sh ./mvnw -DskipTests compile` on macOS/Linux or `.\mvnw.cmd -DskipTests compile` on Windows is a source-compilation check; it is not proof of JPA startup, HTTP service availability, or a native binary.
+The root Maven wrapper is present. Duplicate Lombok and Boot-plugin declarations have been merged while preserving the buildpack, AOT, and packaging configuration. `sh ./mvnw -DskipTests compile` on macOS/Linux or `.\mvnw.cmd -DskipTests compile` on Windows is a source-compilation check; it is not proof of JPA startup, HTTP service availability, or a native binary.
 
 The database settings now read environment variables. Use [DATABASE.md](docs/DATABASE.md) only with a disposable local database. Fix the application model and choose either JPA with a proper entity or an appropriate reactive persistence stack before expecting startup. A database credential does not fix a missing managed entity.
 
@@ -43,7 +43,7 @@ Spring Boot 3 integrated native-image support and superseded the experimental Sp
 
 1. Select and implement one coherent persistence model.
 2. Add a real local endpoint and a synthetic database fixture.
-3. Simplify the duplicated historical plugin configuration and prove the JVM build.
+3. Verify the historical plugin lifecycle and prove JVM runtime behavior.
 4. Verify a native build and record reproducible toolchain details.
 5. Review image names, secrets handling, probes, and manifests before any Kubernetes deployment.
 
